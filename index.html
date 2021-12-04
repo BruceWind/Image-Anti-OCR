@@ -1,0 +1,115 @@
+<html>
+
+<head>
+    <title>Images anti-ocr </title>
+    <meta charset="utf-8" />
+    <script type="text/javascript" src="./main.js"></script>
+    <style>
+    </style>
+</head>
+
+<body>
+
+    <div style="position: relative;">
+        <!-- set opactity 0 -->
+        <!-- support formats: jpg & png -->
+        <!-- <input id="upload-input" style="position: absolute; top: 0; bottom: 0; left: 0;right: 0; opacity: 0;"
+            type="file" accept="image/jpg, image/png" /> -->
+
+        <input id="upload-input" style="position: absolute; top: 0; bottom: 0; left: 0;right: 0; opacity: 0;"
+            type="file" accept="image/jpg, image/png" onchange="showImg(this)" />
+        <!-- button and images: -->
+        <div style="text-align: top">
+            <span style="font-size: 18px;">click to upload：</span>
+            <img id="upload" src="./upload_icon.png" style="width: 40px; height: 40px; vertical-align: middle;" />
+
+        </div>
+
+        <p>
+            <img id="uploaded" style="vertical-align: middle; border: solid; max-width: 300; max-height: 300;" />
+        </p>
+
+        <p>
+            <img id="output" style="vertical-align: middle; border: solid; max-width: 400; max-height: 400;" />
+        </p>
+    </div>
+    <canvas id="canvas" style="display:block" width="0" height="0"></canvas>
+</body>
+<script type="text/javascript">
+
+    function $(id) {
+        return document.getElementById(id);
+    }
+    function processImg(image) {
+
+        factor = (image.height + image.width) / 2;
+
+        var canvas = $('canvas');
+        canvas.width = image.width;
+        canvas.height = image.height;
+        var context = canvas.getContext('2d');
+        context.drawImage(image, 0, 0);
+        // context.clearRect(0, 0, canvas.width, canvas.height);
+        // // context.fillStyle = $("backcolor").innerHTML;
+        // context.fillRect(0, 0, canvas.width, canvas.height);
+
+
+        n2 = factor * factor / 40;
+        for (var i = 0; i < n2; i++) {
+            x = random(0, canvas.width);
+            y = random(0, canvas.height);
+            context.lineWidth = 2;
+            context.beginPath();
+            context.moveTo(x, y);
+            context.lineTo(x + 1, y + 1);
+            context.closePath();
+            context.stroke();
+        }
+        i = 0;
+
+        for (var i = 0; i < factor / 3; i++) {
+            x = random(0, canvas.width);
+            y = random(0, canvas.height);
+            context.lineWidth = 2;
+            context.beginPath();
+            context.moveTo(x, y);
+            context.lineTo(x + random(- random(0, canvas.width / 2), random(0, canvas.width / 2)), y + random(- random(0, canvas.width / 2), random(0, canvas.width / 2))); //隨機畫線
+            context.closePath();
+            context.stroke();
+        }
+
+
+        // canvas.style.display = 'none';
+
+        var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+        var img = $("output");
+        img.src = canvas.toDataURL("image/png");
+    }
+
+    function random(min, max) {
+        return Math.round(Math.random() * (max - min)) + min;
+    }
+
+
+    function showImg(input) {
+        var file = input.files[0];
+        var reader = new FileReader()
+        // 图片读取成功回调函数
+        reader.onload = function (e) {
+
+            var image = new Image();
+
+            image.src = reader.result;
+
+            image.onload = function () {
+
+                processImg(this);
+                document.getElementById('uploaded').src = image.src;
+                console.log("onLoaded:" + image.width + "*" + image.height);
+            };
+        }
+        reader.readAsDataURL(file);
+    }
+</script>
+
+</html>
