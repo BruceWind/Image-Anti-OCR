@@ -42,19 +42,16 @@
     }
     function processImg(image) {
 
-        factor = (image.height + image.width) / 2;
+        factor = (image.height * image.width) / 32;
 
         var canvas = $('canvas');
         canvas.width = image.width;
         canvas.height = image.height;
         var context = canvas.getContext('2d');
         context.drawImage(image, 0, 0);
-        // context.clearRect(0, 0, canvas.width, canvas.height);
-        // // context.fillStyle = $("backcolor").innerHTML;
-        // context.fillRect(0, 0, canvas.width, canvas.height);
 
-
-        n2 = factor * factor / 40;
+        //draw points randomly.
+        n2 = factor / 4;
         for (var i = 0; i < n2; i++) {
             x = random(0, canvas.width);
             y = random(0, canvas.height);
@@ -67,7 +64,8 @@
         }
         i = 0;
 
-        for (var i = 0; i < factor / 3; i++) {
+        //draw lines randomly.
+        for (var i = 0; i < factor / 50; i++) {
             x = random(0, canvas.width);
             y = random(0, canvas.height);
             context.lineWidth = 2;
@@ -78,8 +76,6 @@
             context.stroke();
         }
 
-
-        // canvas.style.display = 'none';
 
         var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
         var img = $("output");
@@ -94,7 +90,7 @@
     function showImg(input) {
         var file = input.files[0];
         var reader = new FileReader()
-        // 图片读取成功回调函数
+
         reader.onload = function (e) {
 
             var image = new Image();
