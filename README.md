@@ -2,7 +2,7 @@
 
 ### In the background
 
-Images containing political infomation that you want to share to social platforms, but it is possible to be blocked by govt.
+Images containing political infomation that you want to share to social platforms, but it could be blocked by govt.
 
 To avoid images being blocked, this repo makes sure you can successfully share images in a political censorship machine.
 
