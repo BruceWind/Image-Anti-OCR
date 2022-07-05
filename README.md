@@ -21,6 +21,6 @@ And then you can open [http://{IP}:8000/](http://localhost.8000) in your web-bro
 
 ### In addition
 
-I'm very sorry! this algorithm may has little bug. Not all images works with it very well.
+I'm very sorry for little bug. Not all images works with it very well.
 
 After executed some of special size of image, this algorithm will make human beings not recognize words from covered images. In that case, you can try to edit js to get it be recognized.
