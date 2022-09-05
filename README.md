@@ -21,6 +21,6 @@ And then you can open [http://localhost:8000/](http://localhost.8000) in your we
 
 ### In addition
 
-I'm very sorry for a few bugs in there. Not all images works with it very well.
+I'm very sorry for a few bugs in there. Not all images work with it very well.
 
 After executed some of special size of image, this algorithm will make human beings not recognize words from covered images. In that case, you can try to edit js to get it be recognized.
