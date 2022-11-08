@@ -1,5 +1,5 @@
 # Image-Anti-OCR
-to social platforms, but it could be 
+
 ### In the background
 
 Sharing large number of images containing political infomation may got blocked by govt.
